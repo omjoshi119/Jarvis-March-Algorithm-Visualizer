@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>JARVIS MARCH ALGORITHM VISUALIZER</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']] 
+                },
+                svg: {
+                    fontCache: 'global'
+                }
+            };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    </head>
+<body>
+    <header>
+        <h1>Jarvis March Algorithm VISUALIZER</h1>        
+        <nav>
+            <ul>
+                
+                <li><a href="jarvis.html">Introduction</a></li>
+                <li><a href="jarvis.html">Example</a></li>
+                <li><a href="#interactive">Try It Out!</a></li>
+                <li><a href="jarvis_code.html">Implementation</a></li>
+                <li><a href="jarvis_references.html">References</a></li>
+                </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="example">
+        <h2>Interactive Canvas Instructions</h2>
+<br>
+<ul style="margin-bottom: 20px;">
+    <li>Click anywhere on the canvas to add a point.</li>
+    <li>Click and drag a point to move it anywhere on the canvas.</li>
+    <li>To delete a point, simply select it with a click and press the 'Delete' key. </li>
+    <li>Press the 'R' key to generate random points on the canvas.</li>
+    <li>Press 'C' to clear all the points on the canvas and start fresh on a blank canvas.</li>
+    <li>Press 'Enter' to start the visualization and 'Space' to Pause and Resume.</li>
+    <li>Press '+' to increase the visualization speed and '-' to slow it down.</li>
+    <li>These interactive features make it easier to understand how the convex hull adapts to different point layouts. Try different setups and watch as the Jarvis March algorithm outlines the outermost points to create the convex hull.</li>
+</ul>
+        </section>
+        <div id="canvasContainer" style="margin-top: 20px;">
+            <script src="jarvis_ConvexHull.js"></script>
+        </div>
+    </main>
+    <footer>
+        <p>Om Joshi © 2025</p>
+    </footer>
+ </body>
+</html>

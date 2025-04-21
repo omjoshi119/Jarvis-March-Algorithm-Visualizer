@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JARVIS MARCH ALGORITHM VISUALIZER</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']]
+                },
+                svg: {
+                    fontCache: 'global'
+                }
+            };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    </head>
+<body>
+    <header>
+        <h1>Jarvis March Algorithm VISUALIZER</h1>
+        <nav>
+            <ul>
+                
+                <li><a href="jarvis.html">Introduction</a></li>
+                <li><a href="jarvis.html">Example</a></li>
+                <li><a href="jarvis_interactive.html">Try It Out!</a></li>
+                <li><a href="#implementation">Implementation</a></li>
+                <li><a href="jarvis_references.html">References</a></li>
+                </ul>
+        </nav>
+    </header>
+    <main>
+        
+        <section id="implementation">
+            <h2>Pseudo Code</h2>
+            <pre>
+            <code>
+
+    1. Find the Starting Point:  
+        - Set `initialPoint` as the leftmost point in the array (smallest x-coordinate).
+    
+    2. Initialize:  
+        - Set `currentPoint` to `initialPoint` and add it to the convex hull.  
+        - Create an empty set `collinearPoints` to track collinear points.
+    
+    3. Iterative Process  
+        - Start a loop to find the convex hull.
+    
+    4. Set Initial Target  
+        - Assume `nextTarget` as the first point in the array, ensuring it differs from `currentPoint`.
+    
+    5. Evaluate Points  
+        - For each point in the array (excluding `currentPoint`):  
+            - Skip if it matches `currentPoint`.  
+            - Compute the cross product for `currentPoint`, `nextTarget`, and the current point.  
+            - If the cross product is positive, update `nextTarget` and clear `collinearPoints`.  
+            - If zero (collinear), compare distances:  
+            - If `nextTarget` is closer, move it to `collinearPoints` and update `nextTarget`.  
+            - Otherwise, add the current point to `collinearPoints`.
+    
+    6. Terminate or Continue  
+        - Add `collinearPoints` to the convex hull.  
+        - If `nextTarget` equals `initialPoint`, terminate the loop.
+    
+    7. Update for Next Iteration  
+        - Add `nextTarget` to the convex hull.  
+        - Set `currentPoint` to `nextTarget`.
+    
+    8. Return the Result  
+        - Once the loop completes, return the convex hull collection.
+            </code>
+            </pre>
+            
+        </section>
+        <section id="time-complexity">
+            <h2>Time Complexity Analysis</h2>
+            <br>
+            
+            <h3>1. Overview:</h3>
+            <p>
+                The time complexity of the Jarvis March algorithm is \(O(nh)\), where:
+                <ul>
+                    <li>\(n\) represents the total number of points in the input set.</li>
+                    <li>\(h\) is the number of points that form the convex hull.</li>
+                </ul>
+            </p>
+            <br>
+            
+            <h3>2. Justification:</h3>
+            <p>
+                <ul>
+                    <li><strong>Input Collection:</strong> Accepting point inputs is a linear operation, \(O(n)\), based on the total number of points.</li>
+                    <br>
+                    <li><strong>Finding the Starting Point:</strong> Determining the leftmost point to initialize the convex hull is \(O(n)\), requiring a single pass through the points.</li>
+                    <br>
+                    <li><strong>Constructing the Hull:</strong> The main loop iterates up to \(h\) times (once for each hull point). For each iteration, it processes all \(n\) points, making this step \(O(n)\) per iteration in the worst case.</li>
+                </ul>
+            </p>
+            <br>
+            
+            <h3>3. Total Time Complexity:</h3>
+            <p>
+                The algorithm’s total time complexity is \(O(nh)\), as it processes \(n\) points for each of the \(h\) hull points.
+            </p>
+            <br>
+            
+            <h3>4. Best and Worst Case:</h3>
+            <p>
+                <ul>
+                    <li><strong>Best Case:</strong> When the number of hull points \(h\) is minimal, such as when all points are collinear (\(h = 2\)). Even in this case, the algorithm must iterate through all \(n\) points, resulting in \(O(n)\).</li>
+                    <br>
+                    <li><strong>Worst Case:</strong> When most or all points are part of the convex hull (\(h ≈ n\)). In this scenario, the complexity becomes \(O(n^2)\).</li>
+                </ul>
+            </p>
+            <br>
+            
+            <h3>5. Space Complexity:</h3>
+            <p>
+                The algorithm requires \(O(n)\) space to store the points. Additional space usage is minimal.
+            </p>
+            <br>
+            
+            <h3>Conclusion:</h3>
+            <p>
+                The \(O(nh)\) complexity of the Jarvis March algorithm is efficient when \(h\) (hull points) is small compared to \(n\) (total points). <br>
+                For cases where \(h\) approaches \(n\), other algorithms like Graham's Scan (\(O(n \log n)\)) are more efficient.
+            </p>
+            <br>
+        </section>
+        
+    </main>
+    <footer>
+        <p> Om Joshi © 2025</p>
+    </footer>
+</body>
+</html>

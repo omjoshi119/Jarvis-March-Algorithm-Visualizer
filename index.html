@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JARVIS MARCH ALGORITHM VISUALIZER</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']]
+                },
+                svg: {
+                    fontCache: 'global'
+                }
+            };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    </head>
+<body>
+    <header>
+        <h1>Jarvis March Algorithm VISUALIZER</h1>
+        <nav>
+            <ul>
+                
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#algorithm">Example</a></li>
+            <li><a href="jarvis_interactive.html">Try It Out!</a></li>
+            <li><a href="jarvis_code.html">Implementation</a></li>
+            <li><a href="jarvis_references.html">References</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="introduction">
+            <h2>About Jarvis March Algorithm </h2>
+            <p>
+                The Jarvis March algorithm, also known as the Gift Wrapping algorithm, is a straightforward and intuitive method for finding the convex hull of a set of points in a 2D plane. The convex hull is the smallest convex boundary that encloses all the points, much like stretching a rubber band around them. This visualization captures the algorithm’s core principle: identifying the outermost points that form this boundary.
+            </p>
+            <p>
+                A staple in computational geometry, the Jarvis March method "wraps" around the points sequentially, similar to wrapping a gift. Its simplicity makes it accessible to beginners while remaining a reliable tool for more advanced users. By methodically identifying each edge of the hull one at a time, the algorithm ensures no boundary point is overlooked, regardless of the complexity of the point configuration.
+            </p>
+            <p>
+                The algorithm has broad applications in fields like computer graphics, geographic information systems, and robotics, where processing geometrical data is essential. However, its performance is influenced by the number of points in the hull, making it less efficient for large datasets. Despite this, its elegance and utility make the Jarvis March algorithm a timeless and valuable technique in computational geometry.
+            </p>
+        </section>
+        <br>
+        <section id="algorithm">
+            <h2>Detailed Example</h2>
+                <h3>Step 1: Initialization</h3>
+                <p><strong>Objective</strong>: Identify the starting point of the convex hull.</p>
+                <p><strong>Process</strong>: Find the point with the lowest y-coordinate among all the points, called the 'anchor point'. If there's a tie for the lowest y-coordinate, choose the point with the lowest x-coordinate. This anchor point is denoted as \(P_0\).</p>
+                <p><strong>Example</strong>: Given points \(A(1,1), B(2,3), C(5,1), D(3,4), E(4,2)\), point \(A\) is \(P_0\) because it has the lowest y-coordinate.</p>
+                <br>
+                
+                <h3>Step 2: Finding the Next Hull Point</h3>
+                <p><strong>Objective</strong>: Select the most counterclockwise point relative to the current point to construct the convex hull.</p>
+                <p><strong>Process</strong>: Use the current point \(P_i\) (starting with \(P_0\)) as a reference. For every point \(P_j\), check if it is the most counterclockwise point by evaluating the orientation of the triplet (\(P_i, P_j, P_k\)) for every other point \(P_k\).</p>
+                <p><strong>Triplet Orientation Explanation</strong>: 
+                    <ul>
+                        <li>The orientation of three points (\(P_i, P_j, P_k\)) can be:
+                            <ul>
+                                <li><strong>Counterclockwise (Left Turn):</strong> \(P_k\) is to the left of the line formed by \(P_i\) and \(P_j\).</li>
+                                <li><strong>Clockwise (Right Turn):</strong> \(P_k\) is to the right of the line formed by \(P_i\) and \(P_j\).</li>
+                                <li><strong>Collinear:</strong> \(P_k\) lies exactly on the line formed by \(P_i\) and \(P_j\).</li>
+                            </ul>
+                        </li>
+                        <li>The orientation can be calculated using the cross product:
+                            \[
+                            \text{Orientation} = (x_2 - x_1)(y_3 - y_1) - (y_2 - y_1)(x_3 - x_1)
+                            \]
+                            <ul>
+                                <li><strong>Positive Value:</strong> Counterclockwise</li>
+                                <li><strong>Negative Value:</strong> Clockwise</li>
+                                <li><strong>Zero:</strong> Collinear</li>
+                            </ul>
+                        </li>
+                        <li>By comparing the orientation of all points relative to \(P_i\), the algorithm selects the most counterclockwise point as the next hull point, \(P_{next}\).</li>
+                    </ul>
+                </p>
+                <p><strong>Example</strong>: From \(P_0 = A\), when examining points \(B, C, D, E\), \(B\) is selected as \(P_{next}\) because it is the most counterclockwise point from \(A\).</p>
+                <br>
+                
+                <h3>Step 3: Check if Hull is Complete</h3>
+                <p><strong>Objective</strong>: Determine if the algorithm has identified all the exterior points.</p>
+                <p><strong>Process</strong>: Verify if \(P_{next} = P_0\). If true, the convex hull is complete. If false, continue by setting \(P_{next}\) as the new reference point for the next iteration.</p>
+                <p><strong>Example</strong>: If \(P_{next}\) after \(B\) is \(A\), the hull is complete. Otherwise, the algorithm continues to the next point.</p>
+                <br>
+                
+                <h3>Step 4: Repeat Finding the Next Hull Point</h3>
+                <p><strong>Objective</strong>: Continue the process of identifying the next point in the convex hull.</p>
+                <p><strong>Process</strong>: Set \(P_i\) to \(P_{next}\) and repeat Step 2. This process iterates until the algorithm loops back to \(P_0\), forming a closed convex hull.</p>
+                <p><strong>Example</strong>: After \(B\), if \(P_{next}\) is \(C\), the process continues from \(C\) to find the next hull point.</p>
+                <br>
+                
+                <h3>Step 5: Output the Convex Hull</h3>
+                <p><strong>Objective</strong>: Return the ordered sequence of points that form the convex hull.</p>
+                <p><strong>Process</strong>: Collect and output the points identified as \(P_{next}\) in the sequence they were discovered. These points represent the vertices of the convex hull in counterclockwise order, starting from the anchor point.</p>
+                <p><strong>Example</strong>: For the given points, the convex hull might be \(A \rightarrow B \rightarrow D \rightarrow C \rightarrow A\), forming the closed boundary.</p>
+                <br>
+                
+                <p><strong>Properties and Considerations</strong>: The Jarvis March algorithm has a time complexity of \(O(nh)\), where \(n\) is the number of points, and \(h\) is the number of points on the convex hull. While it is not the most efficient for large datasets with a high \(h\), its simplicity and clarity make it a valuable tool for computational geometry.</p>                
+        </section>        
+    </main>
+    <footer>
+        <p> Om Joshi © 2025</p>
+    </footer>
+</body>
+</html>
