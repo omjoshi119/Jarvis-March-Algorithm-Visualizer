@@ -5,7 +5,6 @@ let stepDelay = 30;
 let frameCounter = 0;
 let complete = false;
 let isPaused = false;
-
 let index_select_point = -1;
 
 let currentVertex, nextVertex, checking;
