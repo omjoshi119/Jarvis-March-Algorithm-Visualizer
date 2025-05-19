@@ -6,7 +6,7 @@ This project is designed to help users **learn and explore** the algorithm throu
 
 ---
 
-##  Access the visualizer [here](https://your-username.github.io/Jarvis-March-Algorithm-Visualizer).
+##  Access the visualizer [here](https://omjoshi119.github.io/Jarvis-March-Algorithm-Visualizer).
 
 ## Features
 
